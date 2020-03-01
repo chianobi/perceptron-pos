@@ -36,8 +36,11 @@ class Sentence(object):
             prefix = 'pref=' + sent[position][:2].lower()
             suffix = 'suff=' + sent[position][-2:].lower()
             if position == 0:
-                prev_word1 = 'prev_word1=START'
+                prev_word1 = 'prev_word1=*START*'
                 fts.append(prev_word1)
+            if position == len(sent) - 1:
+                next_word1 = 'next_word1=*END*'
+                fts.append(next_word1)
             if position >= 1:
                 if self.training:
                     prev_word1 = 'prev_word1=' + sent[position - 1].lower()
@@ -104,9 +107,11 @@ class Sentence(object):
             prefix = 'pref=' + sent[position][0][:2].lower()
             suffix = 'suff=' + sent[position][0][-2:].lower()
             if position == 0:
-                prev_word1 = 'prev_word1=START'
+                prev_word1 = 'prev_word1=*START*'
                 fts.append(prev_word1)
-
+            if position == len(sent) - 1:
+                next_word1 = 'next_word1=*END*'
+                fts.append(next_word1)
             if position >= 1:
                 if self.training:
                     prev_word1 = 'prev_word1=' + sent[position-1][0].lower()
